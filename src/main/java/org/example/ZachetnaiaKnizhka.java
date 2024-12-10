@@ -1,6 +1,7 @@
 package org.example;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ZachetnaiaKnizhka {
     private String studentName;
@@ -13,8 +14,19 @@ public class ZachetnaiaKnizhka {
     }
 
     // Метод для добавления сессии
-    public void addSession(Session session) {
-        sessions.add(session);
+    public void addSession(String sessionName) {
+        sessions.add(new Session(sessionName));
+    }
+
+    // Метод для добавления предмета в сессию
+    public void addSubjectToSession(String sessionName, String subjectName, String grade) {
+        for (Session session : sessions) {
+            if (session.getSessionName().equals(sessionName)) {
+                session.addSubject(subjectName, grade);
+                return;
+            }
+        }
+        System.out.println("Сессия с именем \"" + sessionName + "\" не найдена!");
     }
 
     // Метод для вывода всех сессий
@@ -26,7 +38,7 @@ public class ZachetnaiaKnizhka {
     }
 
     // Внутренний класс Session для хранения информации о сессиях
-    public class Session {
+    private class Session {
         private String sessionName;
         private List<Subject> subjects;
 
@@ -36,9 +48,13 @@ public class ZachetnaiaKnizhka {
             this.subjects = new ArrayList<>();
         }
 
+        public String getSessionName() {
+            return sessionName;
+        }
+
         // Метод для добавления предмета
-        public void addSubject(Subject subject) {
-            subjects.add(subject);
+        public void addSubject(String subjectName, String grade) {
+            subjects.add(new Subject(subjectName, grade));
         }
 
         // Метод для вывода информации о сессии
@@ -50,7 +66,7 @@ public class ZachetnaiaKnizhka {
         }
 
         // Вложенный класс Subject для хранения информации о предметах
-        public class Subject {
+        private class Subject {
             private String subjectName;
             private String grade;
 
