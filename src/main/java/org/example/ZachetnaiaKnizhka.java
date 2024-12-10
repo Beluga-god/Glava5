@@ -26,7 +26,7 @@ public class ZachetnaiaKnizhka {
     }
 
     // Внутренний класс Session для хранения информации о сессиях
-    public static class Session {
+    public class Session {
         private String sessionName;
         private List<Subject> subjects;
 
@@ -49,8 +49,8 @@ public class ZachetnaiaKnizhka {
             }
         }
 
-        // Внутренний класс Subject для хранения информации о предметах
-        public static class Subject {
+        // Вложенный класс Subject для хранения информации о предметах
+        public class Subject {
             private String subjectName;
             private String grade;
 
